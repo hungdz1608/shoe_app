@@ -70,7 +70,6 @@ class DetailsPage extends StatelessWidget {
                   );
 
                   Provider.of<CartProvider>(context, listen: false).addItem(newShoe);
-
                   ScaffoldMessenger.of(context).showSnackBar(
                     const SnackBar(content: Text("Added to cart")),
                   );

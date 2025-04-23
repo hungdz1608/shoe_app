@@ -83,18 +83,38 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text('Nike Store')),
-      body: GridView.builder(
+      body: Padding(
         padding: const EdgeInsets.all(12.0),
-        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 2,
-          crossAxisSpacing: 12,
-          mainAxisSpacing: 12,
-          childAspectRatio: 0.58,
+        child: LayoutBuilder(
+          builder: (context, constraints) {
+            int crossAxisCount = 2;
+            double childAspectRatio = 0.6;
+
+            if (constraints.maxWidth < 500) {
+              crossAxisCount = 2;
+              childAspectRatio = 0.6;
+            } else if (constraints.maxWidth < 1100) {
+              crossAxisCount = 3; // Hoặc 4 nếu đủ không gian
+              childAspectRatio = 0.53; // tăng chiều cao thẻ
+            } else {
+              crossAxisCount = 5;
+              childAspectRatio = 0.65; // đủ rộng, không bị bóp chiều cao
+            }
+
+            return GridView.builder(
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: crossAxisCount,
+                crossAxisSpacing: 12,
+                mainAxisSpacing: 12,
+                childAspectRatio: childAspectRatio,
+              ),
+              itemCount: data.length,
+              itemBuilder: (context, index) {
+                return CustomProductCard(shoe: data[index]);
+              },
+            );
+          },
         ),
-        itemCount: data.length,
-        itemBuilder: (context, index) {
-          return CustomProductCard(shoe: data[index]);
-        },
       ),
     );
   }

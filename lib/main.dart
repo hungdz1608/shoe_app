@@ -1,5 +1,6 @@
 import 'package:app_ban_giay/pages/layout_page.dart';
 import 'package:app_ban_giay/providers/cart_provider.dart';
+import 'package:app_ban_giay/responsive/responsive_layout.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -18,7 +19,7 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         title: 'Flutter Demo',
         theme: ThemeData(),
-        home: LayoutPage(),
+        home: ResponsiveLayout(),
       ),
     );
   }
